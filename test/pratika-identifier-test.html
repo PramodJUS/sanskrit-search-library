@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratika Identifier Test</title>
+    <style>
+        body {
+            font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-section {
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 18px;
+            font-family: 'Noto Sans Devanagari', Arial;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        .result.error {
+            border-left-color: #f44336;
+            background: #ffebee;
+        }
+        .result.not-pratika {
+            border-left-color: #ff9800;
+            background: #fff3e0;
+        }
+        .result-row {
+            margin: 8px 0;
+            display: flex;
+            gap: 10px;
+        }
+        .result-label {
+            font-weight: bold;
+            min-width: 180px;
+            color: #555;
+        }
+        .result-value {
+            font-family: 'Noto Sans Devanagari', monospace;
+            color: #000;
+        }
+        .test-cases {
+            margin-top: 30px;
+        }
+        .test-case {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            background: #e3f2fd;
+            border: 1px solid #2196F3;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Noto Sans Devanagari', Arial;
+        }
+        .test-case:hover {
+            background: #bbdefb;
+        }
+        .batch-results {
+            margin-top: 20px;
+        }
+        .batch-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .batch-item.success {
+            border-left: 4px solid #4CAF50;
+        }
+        .batch-item.failure {
+            border-left: 4px solid #f44336;
+        }
+        .confidence-bar {
+            display: inline-block;
+            width: 100px;
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(to right, #f44336, #ff9800, #4CAF50);
+            transition: width 0.3s;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>🕉️ Pratika Identifier Test Suite</h1>
+    
+    <div class="test-container">
+        <h2>Single Test</h2>
+        <div class="input-section">
+            <input type="text" id="testInput" placeholder="Enter text (e.g., नारायणमिति)" />
+            <button onclick="runTest()">Test</button>
+            <button onclick="clearResults()">Clear</button>
+        </div>
+        
+        <div id="singleResult"></div>
+        
+        <div class="test-cases">
+            <h3>Quick Test Cases (click to test):</h3>
+            <span class="test-case" onclick="testQuick('नारायणमिति')">नारायणमिति</span>
+            <span class="test-case" onclick="testQuick('रामेति')">रामेति</span>
+            <span class="test-case" onclick="testQuick('हरिरिति')">हरिरिति</span>
+            <span class="test-case" onclick="testQuick('वाय्विति')">वाय्विति</span>
+            <span class="test-case" onclick="testQuick('ब्रह्मणे इति')">ब्रह्मणे इति</span>
+            <span class="test-case" onclick="testQuick('ईश्वरस्येति')">ईश्वरस्येति</span>
+            <span class="test-case" onclick="testQuick('सत्यमिति')">सत्यमिति</span>
+            <span class="test-case" onclick="testQuick('ज्ञेयमिति')">ज्ञेयमिति</span>
+            <span class="test-case" onclick="testQuick('धर्मादिति')">धर्मादिति</span>
+            <span class="test-case" onclick="testQuick('गुरुणा इति')">गुरुणा इति</span>
+            <span class="test-case" onclick="testQuick('विद्यायै इति')">विद्यायै इति</span>
+            <span class="test-case" onclick="testQuick('भूति')">भूति (not pratika)</span>
+            <span class="test-case" onclick="testQuick('द्युति')">द्युति (not pratika)</span>
+            <span class="test-case" onclick="testQuick('यथामति')">यथामति (not pratika)</span>
+            <span class="test-case" onclick="testQuick('नारायण')">नारायण (not pratika)</span>
+            <span class="test-case" onclick="testQuick('अभाव')">अभाव (not pratika)</span>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Batch Testing</h2>
+        <button onclick="runBatchTest()">Run All Tests</button>
+        <div id="batchResults" class="batch-results"></div>
+    </div>
+
+    <script src="../pratika.js"></script>
+    <script>
+        const identifier = new PratikaIdentifier();
+        
+        function runTest() {
+            const input = document.getElementById('testInput').value;
+            if (!input) {
+                alert('Please enter some text to test');
+                return;
+            }
+            displayResult(input);
+        }
+        
+        function testQuick(text) {
+            document.getElementById('testInput').value = text;
+            displayResult(text);
+        }
+        
+        function displayResult(text) {
+            const result = identifier.identifyPratika(text);
+            const searchableForms = identifier.extractSearchableForms(text);
+            const resultDiv = document.getElementById('singleResult');
+            
+            if (!result) {
+                resultDiv.innerHTML = '<div class="result error"><strong>Error:</strong> Invalid input</div>';
+                return;
+            }
+            
+            if (!result.isPratika) {
+                resultDiv.innerHTML = `
+                    <div class="result not-pratika">
+                        <div class="result-row">
+                            <span class="result-label">Input Text:</span>
+                            <span class="result-value">${result.originalText}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Result:</span>
+                            <span class="result-value" style="color: #ff9800; font-weight: bold;">Not a Pratika</span>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const confidencePercent = result.confidence;
+            const confidenceColor = confidencePercent >= 85 ? '#4CAF50' : confidencePercent >= 70 ? '#ff9800' : '#f44336';
+            
+            resultDiv.innerHTML = `
+                <div class="result">
+                    <div class="result-row">
+                        <span class="result-label">Input Text:</span>
+                        <span class="result-value">${result.originalText}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">✓ Is Pratika:</span>
+                        <span class="result-value" style="color: #4CAF50; font-weight: bold;">YES</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Extracted Stem:</span>
+                        <span class="result-value" style="font-size: 20px; font-weight: bold; color: #1976D2;">${result.stem}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Searchable Forms:</span>
+                        <span class="result-value" style="font-size: 18px; font-weight: bold; color: #388E3C;">${searchableForms ? searchableForms.join(', ') : result.stem}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Pattern Type:</span>
+                        <span class="result-value">${result.pattern}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Description:</span>
+                        <span class="result-value">${result.patternDescription}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">इति Ending:</span>
+                        <span class="result-value">${result.itiEnding}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Confidence:</span>
+                        <span class="result-value">${confidencePercent}%</span>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: ${confidencePercent}%; background: ${confidenceColor};"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function clearResults() {
+            document.getElementById('singleResult').innerHTML = '';
+            document.getElementById('testInput').value = '';
+        }
+        
+        function runBatchTest() {
+            const testCases = [
+                { input: 'नारायणमिति', expectedStem: 'नारायणम्', shouldBePratika: true },
+                { input: 'रामेति', expectedStem: 'राम', shouldBePratika: true },
+                { input: 'हरिरिति', expectedStem: 'हरिः', shouldBePratika: true },
+                { input: 'रामरिति', expectedStem: 'रामः', shouldBePratika: true },
+                { input: 'वाय्विति', expectedStem: 'वायु', shouldBePratika: true },
+                { input: 'ब्रह्मणे इति', expectedStem: 'ब्रह्मणे', shouldBePratika: true },
+                { input: 'ईश्वरस्येति', expectedStem: 'ईश्वरस्य', shouldBePratika: true },
+                { input: 'सत्यमिति', expectedStem: 'सत्यम्', shouldBePratika: true },
+                { input: 'ज्ञेयमिति', expectedStem: 'ज्ञेयम्', shouldBePratika: true },
+                { input: 'धर्मादिति', expectedStem: 'धर्मात्, धर्माद्', shouldBePratika: true },
+                { input: 'हराविति', expectedStem: 'हरौ', shouldBePratika: true },
+                { input: 'स्यादिति', expectedStem: 'स्यात्', shouldBePratika: true },
+                { input: 'शास्त्रार्थ इति', expectedStem: 'शास्त्रार्थे, शास्त्रार्थः', shouldBePratika: true },
+                { input: 'भूति', expectedStem: null, shouldBePratika: false },
+                { input: 'द्युति', expectedStem: null, shouldBePratika: false },
+                { input: 'यथामति', expectedStem: null, shouldBePratika: false },
+                { input: 'नारायण', expectedStem: null, shouldBePratika: false },
+                { input: 'अभाव', expectedStem: null, shouldBePratika: false },
+                { input: 'ब्रह्मा', expectedStem: null, shouldBePratika: false }
+            ];
+            
+            const resultsDiv = document.getElementById('batchResults');
+            let html = '<h3>Test Results:</h3>';
+            let passed = 0;
+            let failed = 0;
+            
+            testCases.forEach((testCase, index) => {
+                const result = identifier.identifyPratika(testCase.input);
+                const searchableForms = identifier.extractSearchableForms(testCase.input);
+                const isPratikaCorrect = result.isPratika === testCase.shouldBePratika;
+                const stemCorrect = testCase.shouldBePratika ? (result.stem === testCase.expectedStem) : true;
+                const success = isPratikaCorrect && stemCorrect;
+                
+                if (success) passed++;
+                else failed++;
+                
+                const formsDisplay = searchableForms && searchableForms.length > 1 
+                    ? `Forms: ${searchableForms.join(', ')}` 
+                    : result.stem ? `Stem: ${result.stem}` : '';
+                
+                html += `
+                    <div class="batch-item ${success ? 'success' : 'failure'}">
+                        <strong>Test ${index + 1}:</strong> ${testCase.input}
+                        ${success ? '✓' : '✗'}
+                        <br/>
+                        <small>
+                            Expected: ${testCase.shouldBePratika ? 'Pratika' : 'Not Pratika'}
+                            ${testCase.expectedStem ? ` → Stem: ${testCase.expectedStem}` : ''}
+                            <br/>
+                            Got: ${result.isPratika ? 'Pratika' : 'Not Pratika'}
+                            ${result.isPratika ? ` → ${formsDisplay}` : ''}
+                            ${result.isPratika ? ` (${result.pattern}, ${result.confidence}% confidence)` : ''}
+                        </small>
+                    </div>
+                `;
+            });
+            
+            html = `<div style="padding: 15px; background: ${passed === testCases.length ? '#e8f5e9' : '#fff3e0'}; border-radius: 4px; margin-bottom: 20px;">
+                        <strong>Summary:</strong> ${passed} passed, ${failed} failed out of ${testCases.length} tests
+                    </div>` + html;
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        // Run batch test on load
+        window.onload = function() {
+            console.log('Pratika Identifier loaded successfully');
+        };
+    </script>
+</body>
+</html>

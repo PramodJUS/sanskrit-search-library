@@ -1,0 +1,35 @@
+{
+  "name": "sanskrit-search",
+  "version": "1.0.0",
+  "description": "Search and match Sanskrit text with sandhi splitting and pratika identification",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "sanskrit",
+    "sandhi",
+    "search",
+    "devanagari",
+    "pratika",
+    "text-matching",
+    "indic-scripts"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PramodJUS/sanskrit-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PramodJUS/sanskrit-search/issues"
+  },
+  "homepage": "https://github.com/PramodJUS/sanskrit-search#readme",
+  "files": [
+    "index.js",
+    "sanskrit-search.js",
+    "sandhi-rules.js",
+    "pratika.js",
+    "README.md"
+  ]
+}
