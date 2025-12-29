@@ -1,5 +1,5 @@
 {
-  "name": "sanskrit-search",
+  "name": "sanskrit-search-library",
   "version": "1.0.0",
   "description": "Search and match Sanskrit text with sandhi splitting and pratika identification",
   "main": "index.js",
@@ -19,12 +19,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PramodJUS/sanskrit-search.git"
+    "url": "https://github.com/PramodJUS/sanskrit-search-library.git"
   },
   "bugs": {
-    "url": "https://github.com/PramodJUS/sanskrit-search/issues"
+    "url": "https://github.com/PramodJUS/sanskrit-search-library/issues"
   },
-  "homepage": "https://github.com/PramodJUS/sanskrit-search#readme",
+  "homepage": "https://github.com/PramodJUS/sanskrit-search-library#readme",
   "files": [
     "index.js",
     "sanskrit-search.js",
