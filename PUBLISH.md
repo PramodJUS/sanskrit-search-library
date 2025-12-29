@@ -23,14 +23,14 @@
 
 ### Installation
 ```bash
-npm install sanskrit-search
+npm install sanskrit-search-library
 ```
 
 ### Usage in Node.js or Modern JavaScript
 
 ```javascript
 // Import the main class
-const SanskritSearch = require('sanskrit-search');
+const SanskritSearch = require('sanskrit-search-library');
 
 // Create an instance
 const searcher = new SanskritSearch();
@@ -52,9 +52,9 @@ console.log(results);
 </head>
 <body>
     <!-- Include the library -->
-    <script src="https://unpkg.com/sanskrit-search@latest/sanskrit-search.js"></script>
-    <script src="https://unpkg.com/sanskrit-search@latest/sandhi-rules.js"></script>
-    <script src="https://unpkg.com/sanskrit-search@latest/pratika.js"></script>
+    <script src="https://unpkg.com/sanskrit-search-library@latest/sanskrit-search.js"></script>
+    <script src="https://unpkg.com/sanskrit-search-library@latest/sandhi-rules.js"></script>
+    <script src="https://unpkg.com/sanskrit-search-library@latest/pratika.js"></script>
 
     <script>
         // Use the library
